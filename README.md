@@ -4,8 +4,9 @@
 
 ## 사용자
 
-| 1 | 사용자ID | USER_ID | nvarchar | 8 | * | Y |  |  |  |  |
+| NO | Desc | Name | Type | Size | NM | PK | Default | Relation | RColumn | Definition |
 | :---: | :---- | :---- | :---: | :---: | :---: | :---: | :---: | :---- | :---- | :---- |
+| 1 | 사용자ID | USER_ID | nvarchar | 8 | * | Y |  |  |  |  |
 | 2 | 이름 | USER_NM | nvarchar | 50 | * |  |  |  |  |  |
 | 3 | 생년월일 | USER_BOD | nvarchar | 10 | * |  |  |  |  | yyyy-mm-dd |
 | 4 | 휴대폰 번호 | USER_PH | nvarchar | 12 | * |  |  |  |  | - 없이 저장 |
@@ -15,8 +16,9 @@
 
 ## 약품기본정보
 
-| 1 | 약품코드 | MED_CODE | nvarchar | 20 | * | Y |  |  |  |  |
+| NO | Desc | Name | Type | Size | NM | PK | Default | Relation | RColumn | Definition |
 | :---: | :---- | :---- | :---: | :---: | :---: | :---: | :---: | :---- | :---- | :---- |
+| 1 | 약품코드 | MED_CODE | nvarchar | 20 | * | Y |  |  |  |  |
 | 2 | 약품명(국문) | MED_NAME_KOR | nvarchar | 100 | * |  |  |  |  |  |
 | 3 | 약품명(영문) | MED_NAME_ENG | nvarchar | 100 | * |  |  |  |  |  |
 | 4 | 재형명 | FORM_TYPE | nvarchar | 50 | * |  |  |  |  | 예: 정제, 캡슐 등 |
@@ -27,8 +29,9 @@
 
 ## 사용자 약품 정보
 
-| 1 | 사용자약품ID | USER_MED_ID | INT |  | * | Y |  |  |  |  |
+| NO | Desc | Name | Type | Size | NM | PK | Default | Relation | RColumn | Definition |
 | :---: | :---- | :---- | :---: | :---: | :---: | :---: | :---: | :---- | :---- | :---- |
+| 1 | 사용자약품ID | USER_MED_ID | INT |  | * | Y |  |  |  |  |
 | 2 | 사용자ID | USER_ID | nvarchar | 8 | * | Y |  | USER | USER |  |
 | 3 | 약품코드 | MED_CODE | nvarchar | 20 | * | Y |  | MedicineInfo | MED_CODE |  |
 | 4 | 구매/처방일자 | PURCHASE_DATE | date |  | * |  |  |  |  |  |
@@ -36,8 +39,9 @@
 
 ## 처방정보
 
-| 1 | 처방ID | PRESC_ID | INT |  | * | Y |  |  |  |  |
+| NO | Desc | Name | Type | Size | NM | PK | Default | Relation | RColumn | Definition |
 | :---: | :---- | :---- | :---: | :---: | :---: | :---: | :---: | :---- | :---- | :---- |
+| 1 | 처방ID | PRESC_ID | INT |  | * | Y |  |  |  |  |
 | 2 | 사용자약품ID | USER_MED_ID | INT |  | * | Y |  | USER_MEDICINE | USER_MED_ID |  |
 | 3 | 1회 투약량 | DOSAGE | nvarchar | 50 | * |  |  |  |  |  |
 | 4 | 1일 투여횟수 | FREQ_PER_DAY | INT |  | * |  |  |  |  |  |
@@ -46,8 +50,9 @@
 
 ## 알람
 
-| 1 | 알림ID | ALERT_ID | INT |  | * | Y |  |  |  |  |
+| NO | Desc | Name | Type | Size | NM | PK | Default | Relation | RColumn | Definition |
 | :---: | :---- | :---- | :---: | :---: | :---: | :---: | :---: | :---- | :---- | :---- |
+| 1 | 알림ID | ALERT_ID | INT |  | * | Y |  |  |  |  |
 | 2 | 사용자ID | USER_ID | nvarchar | 8 | * | Y |  | USER | USER_ID |  |
 | 3 | 사용자약품ID | USER_MED_ID | int |  | * | Y |  | USER_MEDICINE | USER_MED_ID |  |
 | 4 | 알림유형 | ALERT_TYPE | nvarchar | 20 | * |  |  |  |  |  |
@@ -55,8 +60,9 @@
 
 ## 폐기정보
 
-| 1 | 수거함ID | BOX_ID | INT |  | * | Y |  |  |  | 폐의약품 수거함 고유번호 |
+| NO | Desc | Name | Type | Size | NM | PK | Default | Relation | RColumn | Definition |
 | :---: | :---- | :---- | :---: | :---: | :---: | :---: | :---: | :---- | :---- | :---- |
+| 1 | 수거함ID | BOX_ID | INT |  | * | Y |  |  |  | 폐의약품 수거함 고유번호 |
 | 2 | 위치명 | LOCATION | nvarchar | 20 | * |  |  |  |  | 예: OO약국, OO보건소 |
 | 3 | 주소 | ADDRESS | nvarchar | 100 | * |  |  |  |  | 주소 |
 | 4 | 상세위치 | ADDRESS_D | nvarchar | 200 |  |  |  |  |  | 건물 내 위치 등 |
@@ -67,7 +73,11 @@
 
 | 사용자 등록 관련 로직 |
 | ----- |
-| 사용자 등록      ← 이건 필수! 어떻게 회원 가입을 시키지? 일반 회원가입 (카카오로 로그인 api) [참고 링크](https://jinhos-devlog.tistory.com/entry/Spring-Rest-API-%EC%B9%B4%EC%B9%B4%EC%98%A4-Kakao-OAuth-%EB%A1%9C%EA%B7%B8%EC%9D%B8-%EA%B5%AC%ED%98%84%ED%95%98%EA%B8%B0) 회원 정보 입력  건강정보. 당뇨 같은 것…  피해야하는 약물 정보 알레르겐 임신 상태 등 거주지 입력 |
+| 사용자 등록      ← 이건 필수! 
+    --> 어떻게 회원 가입을 시키지? 
+          - 일반 회원가입 
+          - 카카오로 로그인 api [참고 링크](https://jinhos-devlog.tistory.com/entry/Spring-Rest-API-%EC%B9%B4%EC%B9%B4%EC%98%A4-Kakao-OAuth-%EB%A1%9C%EA%B7%B8%EC%9D%B8-%EA%B5%AC%ED%98%84%ED%95%98%EA%B8%B0) 
+    --> 회원 정보 입력  건강정보. 당뇨 같은 것…  피해야하는 약물 정보 알레르겐 임신 상태 등 거주지 입력 |
 | **약품 등록 관련** |
 | 사용자 약품 정보 약품 이름 1회 투약량 1일 투여량 총 투여일수 복용량 약품 사진 찍으면 그거 인식해서 자동으로 사용자 약품으로 등록 처방전, 약품 포장 정보 ocr 인식 사용자 약품으로 등록 건강 이음 투약이력 상세에서 추출 가능 유통기한 수동입력 / 자동입력  사용자가 피해야하는 약품 자동 인식(선택)  |
 | **알림 서비스** |
